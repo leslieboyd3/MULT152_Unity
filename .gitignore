@@ -2,6 +2,29 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
+
+# Unity
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]serSettings/
+[Mm]emoryCaptures/
+
+# IDE
+.vs/
+.idea/
+*.user
+*.csproj
+*.sln
+
+# OS
+.DS_Store
+Thumbs.db
+
+
 .utmp/
 /[Ll]ibrary/
 /[Tt]emp/
