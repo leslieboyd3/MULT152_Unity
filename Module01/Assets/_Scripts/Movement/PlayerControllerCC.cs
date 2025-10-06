@@ -12,6 +12,9 @@ public class PlayerControllerCC : MonoBehaviour
     public float runSpeed = 6.0f;
     public float crouchSpeed = 1.8f;
 
+    [Header("Input Filtering")]
+    public float moveDeadzone = 0.15f;
+
     [Header("Smoothing")]
     public float accelTime = 0.12f;
     public float decelTime = 0.2f;
@@ -25,14 +28,14 @@ public class PlayerControllerCC : MonoBehaviour
     public float standingHeight = 1.8f;
     public float crouchHeight = 1.2f;
 
-    [Header("Jump")]
-    public float jumpHeight = 2.8f;
-
     [Header("Sprint Stamina")]
     public float maxStamina = 5f;
     public float staminaDrainPerSec = 1.5f;
     public float staminaRegenPerSec = 1.0f;
     public float sprintCooldown = 0.25f;
+
+    [Header("Jump")]
+    public float jumpForce = 8f;
 
     CharacterController cc;
     Vector3 velocity;            // world-space velocity we apply via cc.Move
@@ -42,6 +45,13 @@ public class PlayerControllerCC : MonoBehaviour
     float stamina;
     bool isCrouching;
     float lastSprintReleaseTime;
+
+    // --- HUD accessors (add these) ---
+    public float CurrentStamina => stamina;      // your existing stamina field
+    public float MaxStamina => maxStamina;   // your existing maxStamina field
+    public bool IsCrouching => isCrouching;  // your existing crouch flag
+    public bool IsGrounded => cc ? cc.isGrounded : false;  // CharacterController grounded
+
 
     void Awake()
     {
@@ -61,17 +71,29 @@ public class PlayerControllerCC : MonoBehaviour
         Vector2 move = input ? input.Move : Vector2.zero;
         bool sprintHeld = input && input.sprintHeld;
         bool crouchHeld = input && input.crouchHeld;
-        bool Jumping = input && input.Jumping;
+
+        //Jump Input
+        bool jumpPressed = input && input.jumpPressed;
+
+        // --- Deadzone + no forced normalization ---
+        // Filter tiny stick drift so it doesn't become full-speed.
+        float mag = move.magnitude;
+        Vector2 filtered = (mag >= moveDeadzone) ? move : Vector2.zero;
+
+        // If someone mashes both axes > 1 (rare with keyboard), clamp to 1 without normalizing drift to 1.
+        if (filtered.sqrMagnitude > 1f) filtered = filtered.normalized;
 
         //Replace x/z
-        float x = move.x;
-        float z = move.y;
+        /*float x = move.x;
+        float z = move.y;*/
+        float x = filtered.x;
+        float z = filtered.y;
 
+        // desired speed
         bool wantsCrouch = crouchHeld;
         if (wantsCrouch && !isCrouching) StartCrouch();
         else if (!wantsCrouch && isCrouching) TryStand();
 
-        // desired speed
         float targetSpeed = isCrouching ? crouchSpeed : walkSpeed;
         bool canSprint = !isCrouching && stamina > 0.15f && Time.time - lastSprintReleaseTime > sprintCooldown;
         
@@ -88,7 +110,7 @@ public class PlayerControllerCC : MonoBehaviour
         }
 
         // world-space desired planar velocity
-        Vector3 inputDir = new Vector3(x, 0, z).normalized;
+        Vector3 inputDir = new Vector3(x, 0, z);
         Vector3 desiredPlanar = transform.TransformDirection(inputDir) * targetSpeed;
 
         // smooth accel/decel
@@ -97,12 +119,25 @@ public class PlayerControllerCC : MonoBehaviour
 
         // gravity + grounding
         bool grounded = cc.isGrounded;
-        if (grounded && yVel < 0f) yVel = groundedStick; // small downward bias to stay grounded
-        yVel += gravity * Time.deltaTime;
 
-        // jumping code goes here 
-        bool jumping = cc.isGrounded;
+        if (grounded)
+        {
+            // Snap to ground with a small downward velocity
+            if (yVel < 0f) yVel = groundedStick;
 
+            // Jump only on the press frame
+            if (jumpPressed)
+            {
+                // Use set, not +=, to avoid stacking
+                yVel = jumpForce;
+                Debug.Log("Player Jumped");
+            }
+        }
+        else
+        {
+            // Apply gravity while airborne
+            yVel += gravity * Time.deltaTime;
+        }
 
         // compose final velocity
         velocity = new Vector3(planarVelCurrent.x, yVel, planarVelCurrent.z);
@@ -131,8 +166,6 @@ public class PlayerControllerCC : MonoBehaviour
             SetHeight(standingHeight);
         }
     }
-
-
 
     void SetHeight(float h)
     {
