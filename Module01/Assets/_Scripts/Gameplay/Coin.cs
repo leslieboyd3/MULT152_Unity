@@ -21,7 +21,6 @@ public class Coin : MonoBehaviour
             }*/
 
             // Optional: play pickup sound/FX before destroy
-            Debug.Log($"[{name}] Triggered by Player - You Found the Coin!");
             Destroy(gameObject);
         }
     }
