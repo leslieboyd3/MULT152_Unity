@@ -391,5 +391,5 @@ MonoBehaviour:
   sampleRange: 10
   losMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   playerTag: Player
