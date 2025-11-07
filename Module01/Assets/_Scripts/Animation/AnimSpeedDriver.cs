@@ -4,7 +4,8 @@ using UnityEngine;
 public class AnimSpeedDriver : MonoBehaviour
 {
     [SerializeField] private Animator animator;
-    [SerializeField] private PlayerControllerCC_UD mover; // your Week 5 controller script
+    [SerializeField] private PlayerControllerCC mover; // your Week 5 controller script
+
 
     [SerializeField] private Transform meshTransform;
     [SerializeField] private Vector3 meshOffset;
@@ -13,7 +14,7 @@ public class AnimSpeedDriver : MonoBehaviour
     void Reset()
     {
         animator = GetComponent<Animator>();
-        if (!mover) mover = GetComponent<PlayerControllerCC_UD>();
+        if (!mover) mover = GetComponent<PlayerControllerCC>();
     }
 
     void Update()
@@ -23,11 +24,10 @@ public class AnimSpeedDriver : MonoBehaviour
         animator.SetFloat("Speed", speed);
         animator.SetBool("IsMoving", speed > 0.1f);
     }
-    private void LateUpdate()
+
+    void LateUpdate()
     {
         if (meshTransform)
-        {
-            meshTransform.localPosition = meshOffset; 
-        }
+            meshTransform.localPosition = meshOffset;
     }
 }

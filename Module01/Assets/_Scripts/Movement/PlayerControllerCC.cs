@@ -6,11 +6,18 @@ public class PlayerControllerCC : MonoBehaviour
 {
     [Header("InputBridge")]
     [SerializeField] private InputBridge input;
-    
+
+    [Header("Animator")]
+    [SerializeField] private Animator animator;
+
     [Header("Move Speeds")]
     public float walkSpeed = 3.5f;
     public float runSpeed = 6.0f;
     public float crouchSpeed = 1.8f;
+
+    [Header("Rotation")]
+    public float turnSpeed = 180f; // degrees per second
+    public float mouseSensitivity = 2f;
 
     [Header("Input Filtering")]
     public float moveDeadzone = 0.15f;
@@ -52,6 +59,8 @@ public class PlayerControllerCC : MonoBehaviour
     public bool IsCrouching => isCrouching;  // your existing crouch flag
     public bool IsGrounded => cc ? cc.isGrounded : false;  // CharacterController grounded
 
+    public float CurrentSpeed => planarVelCurrent.magnitude;//Expose CurrentSpeed
+    public bool isSprinting { get; private set; }
 
     void Awake()
     {
@@ -72,6 +81,16 @@ public class PlayerControllerCC : MonoBehaviour
         bool sprintHeld = input && input.sprintHeld;
         bool crouchHeld = input && input.crouchHeld;
 
+        // --- Rotation ---
+        float keyboardTurn = input ? input.Move.x : 0f; // A/D or left/right
+        float mouseTurn = input ? input.Look.x : 0f;    // Mouse delta (horizontal)
+
+        // Combine rotation sources
+        float turnAmount = (keyboardTurn * turnSpeed + mouseTurn * mouseSensitivity) * Time.deltaTime;
+
+        // Apply rotation around Y axis
+        transform.Rotate(0f, turnAmount, 0f);
+
         //Jump Input
         bool jumpPressed = input && input.jumpPressed;
 
@@ -89,6 +108,16 @@ public class PlayerControllerCC : MonoBehaviour
         float x = filtered.x;
         float z = filtered.y;
 
+        if(animator)
+{
+            animator.SetFloat("Speed", planarVelCurrent.magnitude);
+            animator.SetBool("IsMoving", planarVelCurrent.magnitude > 0.1f);
+            animator.SetBool("IsCrouching", isCrouching);
+            animator.SetBool("IsGrounded", cc.isGrounded);
+            animator.SetBool("IsJumping", !cc.isGrounded);
+            animator.SetBool("IsSprinting", isSprinting);
+        }
+
         // desired speed
         bool wantsCrouch = crouchHeld;
         if (wantsCrouch && !isCrouching) StartCrouch();
@@ -100,11 +129,13 @@ public class PlayerControllerCC : MonoBehaviour
         if (sprintHeld && canSprint && (Mathf.Abs(x) + Mathf.Abs(z) > 0.1f))
         {
             targetSpeed = runSpeed;
+            isSprinting = true;
             stamina = Mathf.Max(0f, stamina - staminaDrainPerSec * Time.deltaTime);
             if (stamina <= 0f) lastSprintReleaseTime = Time.time;
         }
         else
         {
+            isSprinting = false;
             stamina = Mathf.Min(maxStamina, stamina + staminaRegenPerSec * Time.deltaTime);
             if (!sprintHeld) lastSprintReleaseTime = Time.time;
         }
@@ -138,6 +169,16 @@ public class PlayerControllerCC : MonoBehaviour
             // Apply gravity while airborne
             yVel += gravity * Time.deltaTime;
         }
+
+
+        if (input && input.firePressed)
+        {
+            if (animator)
+            {
+                animator.SetTrigger("Attack");
+            }
+        }
+
 
         // compose final velocity
         velocity = new Vector3(planarVelCurrent.x, yVel, planarVelCurrent.z);
