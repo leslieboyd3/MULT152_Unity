@@ -7,11 +7,6 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: light_bulb
-    second: {fileID: 2100000, guid: 8623d0c5ed616ab45bd8de9e703aaf62, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
       name: pendant_light_bulb
     second: {fileID: 2100000, guid: bd02444f88c0f8e4bb6f5037829d2d43, type: 2}
   materials:
