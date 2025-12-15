@@ -1102,7 +1102,7 @@ GameObject:
   - component: {fileID: 1625150227757440960}
   - component: {fileID: 4975912841843645612}
   - component: {fileID: 4620574317222414976}
-  - component: {fileID: 9115331008933386817}
+  - component: {fileID: -7346047543314706088}
   m_Layer: 0
   m_Name: Player_1P
   m_TagString: Player
@@ -1362,7 +1362,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &9115331008933386817
+--- !u!114 &-7346047543314706088
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1371,13 +1371,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3652896626278288780}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 312282406aceeea4dbcd6b5700e7edc1, type: 3}
+  m_Script: {fileID: 11500000, guid: 828a72906b668be4894d574aeb360c6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimSpeedDriver
   animator: {fileID: 4620574317222414976}
-  mover: {fileID: 6133932457784187948}
-  meshTransform: {fileID: 3130608630239252128}
-  meshOffset: {x: 0, y: 1.2, z: 0}
+  mover: {fileID: 0}
+  meshTransform: {fileID: 0}
+  meshOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &3653572288779515080
 GameObject:
   m_ObjectHideFlags: 0
