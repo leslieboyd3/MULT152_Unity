@@ -9,16 +9,19 @@ public class InputBridge : MonoBehaviour
     public bool sprintHeld { get; private set; }
     //public bool CrouchPressed { get; private set; } // edge-triggered this frame
     public bool crouchHeld { get; private set; }
-
     public bool jumpPressed { get; private set; }
-
     public bool firePressed { get; private set; }
-
     public bool reloadPressed { get; private set; }
+    public bool menuTogglePressed { get; private set; }
 
     // Optional sensitivity (for Look scaling)
     [Header("Look Tuning")]
     public float lookSensitivity = 1.0f; // multiply mouse/right-stick
+
+    public void OnMenuToggle(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started) menuTogglePressed = true;
+    }
 
     // These are called by PlayerInput (Invoke Unity Events)
     public void OnMove(InputAction.CallbackContext ctx)
@@ -69,5 +72,6 @@ public class InputBridge : MonoBehaviour
         jumpPressed = false;
         firePressed = false;
         reloadPressed = false;
+        menuTogglePressed = false;
     }
 }

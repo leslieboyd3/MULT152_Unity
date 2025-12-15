@@ -65,6 +65,11 @@ public class HealthComponent : MonoBehaviour
         else Debug.LogWarning("[HealthComponent] Died but RestartUI not found.");
     }
 
+    public void SetHealth(int value)
+    {
+        Current = Mathf.Clamp(value, 0, maxHealth);
+        RaiseChanged();
+    }
 
     private void RaiseChanged()
     {

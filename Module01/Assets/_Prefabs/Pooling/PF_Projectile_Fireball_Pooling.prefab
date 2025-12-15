@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 975215956855315922}
   - component: {fileID: 4971581979892015970}
   - component: {fileID: 5295717870741225702}
-  - component: {fileID: 3466268287944698046}
   m_Layer: 0
   m_Name: PF_Projectile_Fireball_Pooling
   m_TagString: Untagged
@@ -97,27 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PooledProjectile
   speed: 20
-  life: 5
---- !u!114 &3466268287944698046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3683420933076947173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3131d9f795e23ba4980a6e8ba36b1d08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Projectile
-  damage: 10
-  lifeSeconds: 5
-  hitMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  hitVfx: {fileID: 0}
-  hitSfx: {fileID: 0}
-  sfxVolume: 0.8
+  life: 2
 --- !u!1 &6608558780398205689
 GameObject:
   m_ObjectHideFlags: 0

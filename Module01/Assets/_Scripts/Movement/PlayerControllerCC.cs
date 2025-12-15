@@ -71,6 +71,18 @@ public class PlayerControllerCC : MonoBehaviour
 
     void Update()
     {
+        // --If getting errors on older module demos, comment the MenuManager update below
+        // Prevent Movement when the menu is open
+        if (MenuManager.IsMenuOpen)
+        {
+            return;
+        }
+
+        if (cc == null || !cc.enabled)
+        {
+            return;
+        }
+
         // ---- INPUT (OLD system) ----
         /*float x = Input.GetAxisRaw("Horizontal"); // A/D or left/right
         float z = Input.GetAxisRaw("Vertical");   // W/S or up/down
