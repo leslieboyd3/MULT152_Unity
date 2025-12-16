@@ -21,6 +21,7 @@ public class PatrolChaseAI : MonoBehaviour
 
     [Header("Collision")]
     public string playerTag = "Player"; // tag to check for destroy on hit
+    public HealthComponent playerHealth;
 
     enum State { Patrol, Chase }
     State state = State.Patrol;
@@ -125,7 +126,8 @@ public class PatrolChaseAI : MonoBehaviour
         if (collision.gameObject.CompareTag(playerTag))
         {
             Debug.Log($"[{name}] collided with Player - you got caught");
-            Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
+            playerHealth.Damage(playerHealth.Current > 0 ? playerHealth.Current : 9999);
         }
     }
 
@@ -134,7 +136,8 @@ public class PatrolChaseAI : MonoBehaviour
         if (other.CompareTag(playerTag))
         {
             Debug.Log($"[{name}] Triggered by Player - destroying self");
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
+            playerHealth.Damage(playerHealth.Current > 0 ? playerHealth.Current : 9999);
         }
     }
 }

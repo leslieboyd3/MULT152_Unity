@@ -22852,8 +22852,8 @@ MonoBehaviour:
   - {fileID: 2016478407}
   - {fileID: 1680802909}
   player: {fileID: 843735343}
-  chaseDistance: 5
-  loseDistance: 10
+  chaseDistance: 7
+  loseDistance: 11
   eyeHeight: 1.8
   repathRate: 0.312
   sampleRange: 10
@@ -22861,6 +22861,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   playerTag: Player
+  playerHealth: {fileID: 843735344}
 --- !u!195 &726593022
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -22871,7 +22872,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 4
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 360
@@ -25410,6 +25411,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8917860915182747971, guid: 06d5c6af95b490b41a7d9d60e371b8a9, type: 3}
   m_PrefabInstance: {fileID: 1071214788}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &843735344 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4455173928744795182, guid: 06d5c6af95b490b41a7d9d60e371b8a9, type: 3}
+  m_PrefabInstance: {fileID: 1071214788}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e080decbad065f140b40be26a98b4a60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthComponent
 --- !u!43 &858260667
 Mesh:
   m_ObjectHideFlags: 0
@@ -27062,10 +27074,10 @@ PrefabInstance:
     - target: {fileID: 947792702879079962, guid: 4f53a01498112734abfd5a57d2486bce, type: 3}
       propertyPath: playerHealth
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 843735344}
     - target: {fileID: 947792702879079962, guid: 4f53a01498112734abfd5a57d2486bce, type: 3}
       propertyPath: killTimerSeconds
-      value: 60
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1175388309528156687, guid: 4f53a01498112734abfd5a57d2486bce, type: 3}
       propertyPath: m_Mesh
@@ -29214,6 +29226,14 @@ PrefabInstance:
     - target: {fileID: 5965254761663255931, guid: 06d5c6af95b490b41a7d9d60e371b8a9, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6133932457784187948, guid: 06d5c6af95b490b41a7d9d60e371b8a9, type: 3}
+      propertyPath: runSpeed
+      value: 5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6133932457784187948, guid: 06d5c6af95b490b41a7d9d60e371b8a9, type: 3}
+      propertyPath: walkSpeed
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 8917860915182747971, guid: 06d5c6af95b490b41a7d9d60e371b8a9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -38061,7 +38081,7 @@ PrefabInstance:
     - target: {fileID: 759186921224552564, guid: b39221c19d9f7b14086bb11ee2a45ec9, type: 3}
       propertyPath: playerHealth
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 843735344}
     - target: {fileID: 6176824222289806723, guid: b39221c19d9f7b14086bb11ee2a45ec9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.1
@@ -44266,8 +44286,8 @@ MonoBehaviour:
   - {fileID: 1408605112}
   - {fileID: 1662607730}
   player: {fileID: 843735343}
-  chaseDistance: 5
-  loseDistance: 10
+  chaseDistance: 7
+  loseDistance: 11
   eyeHeight: 1.8
   repathRate: 0.316
   sampleRange: 10
@@ -44275,6 +44295,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   playerTag: Player
+  playerHealth: {fileID: 843735344}
 --- !u!195 &1690482325
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -44285,7 +44306,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 4
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 360
@@ -44946,8 +44967,8 @@ MonoBehaviour:
   - {fileID: 569062330}
   - {fileID: 164743452}
   player: {fileID: 843735343}
-  chaseDistance: 5
-  loseDistance: 10
+  chaseDistance: 7
+  loseDistance: 11
   eyeHeight: 1.8
   repathRate: 0.312
   sampleRange: 10
@@ -44955,6 +44976,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   playerTag: Player
+  playerHealth: {fileID: 843735344}
 --- !u!195 &1717779372
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -44965,7 +44987,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 4
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 360
@@ -46267,8 +46289,8 @@ MonoBehaviour:
   - {fileID: 674666114}
   - {fileID: 1345851845}
   player: {fileID: 843735343}
-  chaseDistance: 5
-  loseDistance: 10
+  chaseDistance: 7
+  loseDistance: 11
   eyeHeight: 1.8
   repathRate: 0.309
   sampleRange: 10
@@ -46276,6 +46298,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   playerTag: Player
+  playerHealth: {fileID: 843735344}
 --- !u!195 &1835524927
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -46286,7 +46309,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 4
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 360
