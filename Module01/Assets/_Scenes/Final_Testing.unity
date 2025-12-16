@@ -29203,6 +29203,10 @@ PrefabInstance:
       propertyPath: meshTransform
       value: 
       objectReference: {fileID: 915031576}
+    - target: {fileID: 3092892839465820162, guid: 06d5c6af95b490b41a7d9d60e371b8a9, type: 3}
+      propertyPath: mouseSensitivity
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 3652896626278288780, guid: 06d5c6af95b490b41a7d9d60e371b8a9, type: 3}
       propertyPath: m_Name
       value: Player_1P

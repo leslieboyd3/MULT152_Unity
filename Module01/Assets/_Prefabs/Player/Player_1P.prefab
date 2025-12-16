@@ -1103,6 +1103,7 @@ GameObject:
   - component: {fileID: 4975912841843645612}
   - component: {fileID: 4620574317222414976}
   - component: {fileID: -7346047543314706088}
+  - component: {fileID: 4455173928744795182}
   m_Layer: 0
   m_Name: Player_1P
   m_TagString: Player
@@ -1378,6 +1379,23 @@ MonoBehaviour:
   mover: {fileID: 0}
   meshTransform: {fileID: 0}
   meshOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &4455173928744795182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3652896626278288780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e080decbad065f140b40be26a98b4a60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthComponent
+  maxHealth: 100
+  startHealth: 100
+  config: {fileID: 11400000, guid: a1d516bd4639f9f42b01d261be2ce375, type: 2}
+  hud: {fileID: 0}
+  restartUI: {fileID: 0}
 --- !u!1 &3653572288779515080
 GameObject:
   m_ObjectHideFlags: 0
