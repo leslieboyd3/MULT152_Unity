@@ -13,6 +13,10 @@ public class RestartUI : MonoBehaviour
     [SerializeField] private TMP_Text restartTMPButtonText;
     [SerializeField] private TMP_Text quitTMPButtonText;
 
+    [Header("UI")]
+    [Tooltip("Reference to the unified UI controller that handles Continue/Reset and closing the panel.")]
+    [SerializeField] private RespawnAndResetUIControllerSolo respawnResetUI;
+
     public static RestartUI Instance { get; private set; }
 
     // Remember cursor state so we can restore if needed
@@ -96,10 +100,15 @@ public class RestartUI : MonoBehaviour
     {
         RestoreCursor();
         Time.timeScale = 1f;
-        Application.Quit();
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
+        // Show the death/reset panel
+        if (respawnResetUI != null)
+         {
+             respawnResetUI.Show();
+         }
+        //        Application.Quit();
+        //#if UNITY_EDITOR
+        //        UnityEditor.EditorApplication.isPlaying = false;
+        //#endif
     }
 
     // ===== Helpers ============================================================

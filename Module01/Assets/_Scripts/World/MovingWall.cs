@@ -12,6 +12,10 @@ public class MovingWall : MonoBehaviour
     [Header("Damage")]
     public int contactDamage = 9999;              // lethal by default
 
+   // [Header("UI")]
+   // [Tooltip("Reference to the unified UI controller that handles Continue/Reset and closing the panel.")]
+   // [SerializeField] private RespawnAndResetUIControllerSolo respawnResetUI;
+
     Vector3 _startLocalPos;
     float _moved;
     bool _active;
@@ -59,8 +63,13 @@ public class MovingWall : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
 
-        var hp = other.GetComponentInParent<HealthComponent>() ?? other.GetComponent<HealthComponent>();
-        if (hp != null && !hp.IsDead)
+         var hp = other.GetComponentInParent<HealthComponent>() ?? other.GetComponent<HealthComponent>();
+         if (hp != null && !hp.IsDead)
             hp.Damage(Mathf.Max(1, contactDamage));
+        // Show the death/reset panel
+       // if (respawnResetUI != null)
+       // {
+       //     respawnResetUI.Show();
+      //  }
     }
 }

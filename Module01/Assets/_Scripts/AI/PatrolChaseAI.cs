@@ -23,6 +23,10 @@ public class PatrolChaseAI : MonoBehaviour
     public string playerTag = "Player"; // tag to check for destroy on hit
     public HealthComponent playerHealth;
 
+    //[Header("UI")]
+    //[Tooltip("Reference to the unified UI controller that handles Continue/Reset and closing the panel.")]
+    //[SerializeField] private RespawnAndResetUIControllerSolo respawnResetUI;
+
     enum State { Patrol, Chase }
     State state = State.Patrol;
     int index; float wait; float timer;
@@ -125,9 +129,14 @@ public class PatrolChaseAI : MonoBehaviour
         Debug.Log($"[{name}] collided with Player - you got caught");
         if (collision.gameObject.CompareTag(playerTag))
         {
-            Debug.Log($"[{name}] collided with Player - you got caught");
+           // Debug.Log($"[{name}] collided with Player - you got caught");
             //Destroy(collision.gameObject);
             playerHealth.Damage(playerHealth.Current > 0 ? playerHealth.Current : 9999);
+            // Show the death/reset panel
+            //if (respawnResetUI != null)
+           // {
+           //     respawnResetUI.Show();
+           // }
         }
     }
 
@@ -135,9 +144,14 @@ public class PatrolChaseAI : MonoBehaviour
     {
         if (other.CompareTag(playerTag))
         {
-            Debug.Log($"[{name}] Triggered by Player - destroying self");
+           // Debug.Log($"[{name}] Triggered by Player - destroying self");
             //Destroy(other.gameObject);
             playerHealth.Damage(playerHealth.Current > 0 ? playerHealth.Current : 9999);
+            // Show the death/reset panel
+            //if (respawnResetUI != null)
+           // {
+            //    respawnResetUI.Show();
+            //}
         }
     }
 }
